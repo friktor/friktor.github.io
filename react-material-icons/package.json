@@ -10,7 +10,7 @@
     "react": "^15.2.1",
     "react-codemirror": "^0.2.6",
     "react-dom": "^15.2.1",
-    "react-morph-material-icons": "git+https://github.com/friktor/react-material-icons.git#refractoring-1.0",
+    "react-morph-material-icons": "git+https://github.com/friktor/react-material-icons.git#refactoring-1.0-as-inner-html",
     "svg-morpheus": "^0.3.0",
     "webpack": "^2.1.0-beta.15"
   },

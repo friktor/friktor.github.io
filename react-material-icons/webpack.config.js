@@ -1,3 +1,4 @@
+// Version with warning inner html shapes icon
 var webpack = require('webpack');
 var path = require('path');
 
