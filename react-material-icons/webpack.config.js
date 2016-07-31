@@ -5,7 +5,6 @@ var path = require('path');
 module.exports = {
   context: __dirname,
   entry: './src/main.js',
-  devtool: 'source-map',
   output: {
     path: path.join(__dirname, 'assets'),
     filename: 'build.js'
@@ -18,9 +17,13 @@ module.exports = {
       query: {
         presets: ['es2015', 'react']
       }
+    }, {
+      test: /\.less$/,
+      loader: "style!css!less"
     }]
   },
 
   plugins: [
+    new webpack.optimize.UglifyJsPlugin()
   ]
 };

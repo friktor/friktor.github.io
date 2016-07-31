@@ -4,7 +4,11 @@ import CodeMirror from "react-codemirror";
 import ReactDOM from "react-dom";
 import styles from "./styles";
 import React from "react";
+import exampleCode from "./example";
 
+import "./theme-codemirror.less";
+
+var randomizer = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 require('codemirror/mode/javascript/javascript');
 
 class SampleIconRandom extends React.Component {
@@ -12,20 +16,18 @@ class SampleIconRandom extends React.Component {
     super();
 
     this.state = {
-      icons: ['done_all', 'favorite_outline', 'explore', 'translate', 'open_with', 'perm_media', 'new_releases'],
-      fills: ['#4CAF50', '#03A9F4', '#3F51B5', '#00BCD4', '#673AB7', '#f44336', '#00BCD4'],
+      fills: ['#4CAF50', '#03A9F4', '#FF5722', '#00BCD4', '#F50057', '#f44336', '#00BCD4'],
       fill: '#4CAF50'
     };
   }
 
   componentDidMount() {
-    // var self = this;
-    //
-    // setInterval(() => {
-    //   var indexRandomColor = Math.floor(Math.random() * (6 - 0 + 1)) + 0;
-    //   self.setState({ fill: self.state.fills[indexRandomColor] });
-    //   self.refs.MorphIconRef.morph(self.state.icons[indexRandomColor]);
-    // }, 1600);
+    var self = this;
+
+    setInterval(() => {
+      self.setState({ fill: self.state.fills[randomizer(0, 6)] });
+      self.refs.MorphIconRef.morph(Object.keys(icons.action)[randomizer(0, 162)]);
+    }, 1600);
   }
 
   render() {
@@ -33,10 +35,8 @@ class SampleIconRandom extends React.Component {
       options: { easing: 'quart-in-out', duration: 350 },
       // Styles prop for icon (svg)
       style: { fill: this.state.fill },
-      // Icons names allowed for morph by keys
-      icons: this.state.icons,
       // Icons shapes with svg
-      shapes: icons,
+      shapes: icons.action,
       // Icon Size (px)
       size: 50,
       // Ref link to element
@@ -48,10 +48,6 @@ class SampleIconRandom extends React.Component {
 }
 
 class HomeView extends React.Component {
-  constructor() {
-    super();
-  }
-
   render() {
     return (
       <div>
@@ -59,27 +55,34 @@ class HomeView extends React.Component {
           <h2 style={styles.header.top}>React Materal Design Icons</h2>
           <h3 style={styles.header.sub}>Material icons with morph animations</h3>
           <div>
-            <div>
-              <SampleIconRandom />
+            <div style={{ marginTop: 25 }}><SampleIconRandom /></div>
+            <div style={{ textAlign: 'left', marginTop: 25 }}>
+              <CodeMirror options={{ lineNumbers: true, theme: 'material' }} value={exampleCode} mode="javascript" />
             </div>
           </div>
         </div>
         <div style={styles.icons}>
-          {Object.keys(icons).map((iconKey, indexIcon) => {
-            var attrs = {
-              style: { fill: '#FFF', display: 'block', width: '100%' },
-              width: 50, height: 50,
-              viewBox: "0 0 24 24"
-            };
-
+          {Object.keys(icons).map((category, indexOfCategories) => {
             return (
-              <div style={styles.icon}>
-                <svg {...attrs}>
-                  <g id={`row-icons-${iconKey}`}>
-                    {icons[iconKey]}
-                  </g>
-                </svg>
-                <span style={{ fontSize: 12, color: '#FFF' }}>{iconKey}</span>
+              <div key={`category-icon-${category}`} style={{ marginTop: 35 }}>
+                <h4 style={{ color: '#FFF', fontWeight: 500 }}>{category.toUpperCase()}</h4>
+                <div>
+                  {Object.keys(icons[category]).map((icon, indexOfIcons) => {
+                    var attrs = {
+                      style: { fill: '#FFF', display: 'block', width: '100%' },
+                      dangerouslySetInnerHTML: { __html: icons[category][icon] },
+                      width: 50, height: 50,
+                      viewBox: "0 0 24 24"
+                    };
+
+                    return (
+                      <div style={styles.icon} key={`icon-of-row-${icon}`}>
+                        <svg {...attrs}></svg>
+                        <span style={{ fontSize: 12, color: '#FFF' }}>{icon}</span>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             );
           })}

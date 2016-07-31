@@ -9,7 +9,7 @@ export default {
       textAlign: 'center',
       display: 'flex',
       width: '100%',
-      height: 500
+      height: 750
     },
     top: {
       color: '#FFFFFF',
