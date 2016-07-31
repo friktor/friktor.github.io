@@ -1,14 +1,32 @@
 {
-  "jspm": {
-    "directories": {},
-    "dependencies": {
-      "react": "npm:react@^0.13.3",
-      "react-morph-material-icons": "github:friktor/react-material-icons@master"
-    },
-    "devDependencies": {
-      "babel": "npm:babel-core@^5.8.22",
-      "babel-runtime": "npm:babel-runtime@^5.8.20",
-      "core-js": "npm:core-js@^1.1.0"
-    }
-  }
+  "name": "react-material-icons",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "react": "^15.2.1",
+    "react-codemirror": "^0.2.6",
+    "react-dom": "^15.2.1",
+    "react-morph-material-icons": "git+https://github.com/friktor/react-material-icons.git",
+    "svg-morpheus": "^0.3.0",
+    "webpack": "^2.1.0-beta.15"
+  },
+  "devDependencies": {
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "css-loader": "^0.23.1",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "style-loader": "^0.13.1",
+    "webpack": "^2.1.0-beta.15"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
 }
