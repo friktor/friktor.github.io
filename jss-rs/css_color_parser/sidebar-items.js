@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Color","Color in rgba format, where {red,green,blue} in 0..255, alpha in 0.0..1.0"],["ColorParseError",""],["NAMED_COLORS","List of CSS3 named colors from http://www.w3.org/TR/css3-color."]]});

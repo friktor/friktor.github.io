@@ -1,0 +1,1 @@
+initSidebarItems({"macro":[["extract","Extract the fields of a single variant from an enum, returning an `Option<T>` where `T` is either the single field, or a tuple of each of the fields in the order they are written."],["let_extract","Extract the fields of a single variant from an enum, binding them into the current scope."]]});
