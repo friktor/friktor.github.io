@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["get_context",""],["get_context_mut",""]],"struct":[["Context",""]],"trait":[["ContextExt",""],["NodeContextExt",""]]});
