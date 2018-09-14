@@ -102,98 +102,98 @@
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Angle</span> {
-  <span class="ident">Degrees</span>(<span class="ident">f32</span>),
-  <span class="ident">Radians</span>(<span class="ident">f32</span>),
+    <span class="ident">Degrees</span>(<span class="ident">f32</span>),
+    <span class="ident">Radians</span>(<span class="ident">f32</span>),
 }
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Length</span> {
-  <span class="ident">Percent</span>(<span class="ident">f32</span>),
-  <span class="ident">Point</span>(<span class="ident">f32</span>),
+    <span class="ident">Percent</span>(<span class="ident">f32</span>),
+    <span class="ident">Point</span>(<span class="ident">f32</span>),
 }
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">SharedUnit</span> {
-  <span class="ident">Length</span>(<span class="ident">Length</span>),
-  <span class="ident">Angle</span>(<span class="ident">Angle</span>),
-  <span class="prelude-val">None</span>,
+    <span class="ident">Length</span>(<span class="ident">Length</span>),
+    <span class="ident">Angle</span>(<span class="ident">Angle</span>),
+    <span class="prelude-val">None</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Length</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">String</span> {
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">unit</span>: <span class="ident">Length</span>) <span class="op">-&gt;</span> <span class="ident">String</span> {
-    <span class="kw">match</span> <span class="ident">unit</span> {
-      <span class="ident">Length</span>::<span class="ident">Percent</span>(<span class="ident">value</span>) <span class="op">=&gt;</span> <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}%&quot;</span>, <span class="ident">value</span>),
-      <span class="ident">Length</span>::<span class="ident">Point</span>(<span class="ident">value</span>) <span class="op">=&gt;</span> <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}px&quot;</span>, <span class="ident">value</span>),
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">unit</span>: <span class="ident">Length</span>) <span class="op">-&gt;</span> <span class="ident">String</span> {
+        <span class="kw">match</span> <span class="ident">unit</span> {
+            <span class="ident">Length</span>::<span class="ident">Percent</span>(<span class="ident">value</span>) <span class="op">=&gt;</span> <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}%&quot;</span>, <span class="ident">value</span>),
+            <span class="ident">Length</span>::<span class="ident">Point</span>(<span class="ident">value</span>) <span class="op">=&gt;</span> <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}px&quot;</span>, <span class="ident">value</span>),
+        }
     }
-  }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">LengthRepr</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;&gt;</span> <span class="kw">for</span> <span class="ident">SharedUnit</span> {
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">u</span>: <span class="ident">LengthRepr</span>) <span class="op">-&gt;</span> <span class="ident">SharedUnit</span> {
-    <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">u</span>.<span class="ident">value</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span>().<span class="ident">unwrap_or</span>(<span class="number">0.0</span>);
-    <span class="kw">match</span> <span class="ident">u</span>.<span class="ident">unit</span> {
-      <span class="string">&quot;percent&quot;</span> <span class="op">=&gt;</span> <span class="ident">SharedUnit</span>::<span class="ident">Length</span>(<span class="ident">Length</span>::<span class="ident">Percent</span>(<span class="ident">value</span>)),
-      <span class="string">&quot;point&quot;</span> <span class="op">=&gt;</span> <span class="ident">SharedUnit</span>::<span class="ident">Length</span>(<span class="ident">Length</span>::<span class="ident">Point</span>(<span class="ident">value</span>)),
-      <span class="kw">_</span> <span class="op">=&gt;</span> <span class="ident">SharedUnit</span>::<span class="prelude-val">None</span>,
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">u</span>: <span class="ident">LengthRepr</span>) <span class="op">-&gt;</span> <span class="ident">SharedUnit</span> {
+        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">u</span>.<span class="ident">value</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span>().<span class="ident">unwrap_or</span>(<span class="number">0.0</span>);
+        <span class="kw">match</span> <span class="ident">u</span>.<span class="ident">unit</span> {
+            <span class="string">&quot;percent&quot;</span> <span class="op">=&gt;</span> <span class="ident">SharedUnit</span>::<span class="ident">Length</span>(<span class="ident">Length</span>::<span class="ident">Percent</span>(<span class="ident">value</span>)),
+            <span class="string">&quot;point&quot;</span> <span class="op">=&gt;</span> <span class="ident">SharedUnit</span>::<span class="ident">Length</span>(<span class="ident">Length</span>::<span class="ident">Point</span>(<span class="ident">value</span>)),
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="ident">SharedUnit</span>::<span class="prelude-val">None</span>,
+        }
     }
-  }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Angle</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">String</span> {
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">unit</span>: <span class="ident">Angle</span>) <span class="op">-&gt;</span> <span class="ident">String</span> {
-    <span class="kw">use</span> <span class="self">self</span>::<span class="ident">Angle</span>::<span class="kw-2">*</span>;
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">unit</span>: <span class="ident">Angle</span>) <span class="op">-&gt;</span> <span class="ident">String</span> {
+        <span class="kw">use</span> <span class="self">self</span>::<span class="ident">Angle</span>::<span class="kw-2">*</span>;
 
-    <span class="kw">match</span> <span class="ident">unit</span> {
-      <span class="ident">Degrees</span>(<span class="ident">v</span>) <span class="op">=&gt;</span> <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}deg&quot;</span>, <span class="ident">v</span>),
-      <span class="ident">Radians</span>(<span class="ident">v</span>) <span class="op">=&gt;</span> <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}rad&quot;</span>, <span class="ident">v</span>),
+        <span class="kw">match</span> <span class="ident">unit</span> {
+            <span class="ident">Degrees</span>(<span class="ident">v</span>) <span class="op">=&gt;</span> <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}deg&quot;</span>, <span class="ident">v</span>),
+            <span class="ident">Radians</span>(<span class="ident">v</span>) <span class="op">=&gt;</span> <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}rad&quot;</span>, <span class="ident">v</span>),
+        }
     }
-  }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Angle</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">euclid</span>::<span class="ident">Angle</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span> {
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">angle</span>: <span class="ident">Angle</span>) <span class="op">-&gt;</span> <span class="ident">euclid</span>::<span class="ident">Angle</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span> {
-    <span class="kw">match</span> <span class="ident">angle</span> {
-      <span class="ident">Angle</span>::<span class="ident">Radians</span>(<span class="ident">v</span>) <span class="op">=&gt;</span> <span class="ident">euclid</span>::<span class="ident">Angle</span>::<span class="ident">radians</span>(<span class="ident">v</span>),
-      <span class="ident">Angle</span>::<span class="ident">Degrees</span>(<span class="ident">v</span>) <span class="op">=&gt;</span> <span class="ident">euclid</span>::<span class="ident">Angle</span>::<span class="ident">degrees</span>(<span class="ident">v</span>),
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">angle</span>: <span class="ident">Angle</span>) <span class="op">-&gt;</span> <span class="ident">euclid</span>::<span class="ident">Angle</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span> {
+        <span class="kw">match</span> <span class="ident">angle</span> {
+            <span class="ident">Angle</span>::<span class="ident">Radians</span>(<span class="ident">v</span>) <span class="op">=&gt;</span> <span class="ident">euclid</span>::<span class="ident">Angle</span>::<span class="ident">radians</span>(<span class="ident">v</span>),
+            <span class="ident">Angle</span>::<span class="ident">Degrees</span>(<span class="ident">v</span>) <span class="op">=&gt;</span> <span class="ident">euclid</span>::<span class="ident">Angle</span>::<span class="ident">degrees</span>(<span class="ident">v</span>),
+        }
     }
-  }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">AngleRepr</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;&gt;</span> <span class="kw">for</span> <span class="ident">SharedUnit</span> {
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">u</span>: <span class="ident">AngleRepr</span>) <span class="op">-&gt;</span> <span class="ident">SharedUnit</span> {
-    <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">u</span>.<span class="ident">value</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span>().<span class="ident">unwrap_or</span>(<span class="number">0.0</span>);
-    <span class="kw">match</span> <span class="ident">u</span>.<span class="ident">angle</span> {
-      <span class="string">&quot;radians&quot;</span> <span class="op">=&gt;</span> <span class="ident">SharedUnit</span>::<span class="ident">Angle</span>(<span class="ident">Angle</span>::<span class="ident">Radians</span>(<span class="ident">value</span>)),
-      <span class="string">&quot;degrees&quot;</span> <span class="op">=&gt;</span> <span class="ident">SharedUnit</span>::<span class="ident">Angle</span>(<span class="ident">Angle</span>::<span class="ident">Degrees</span>(<span class="ident">value</span>)),
-      <span class="kw">_</span> <span class="op">=&gt;</span> <span class="ident">SharedUnit</span>::<span class="prelude-val">None</span>,
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">u</span>: <span class="ident">AngleRepr</span>) <span class="op">-&gt;</span> <span class="ident">SharedUnit</span> {
+        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">u</span>.<span class="ident">value</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span>().<span class="ident">unwrap_or</span>(<span class="number">0.0</span>);
+        <span class="kw">match</span> <span class="ident">u</span>.<span class="ident">angle</span> {
+            <span class="string">&quot;radians&quot;</span> <span class="op">=&gt;</span> <span class="ident">SharedUnit</span>::<span class="ident">Angle</span>(<span class="ident">Angle</span>::<span class="ident">Radians</span>(<span class="ident">value</span>)),
+            <span class="string">&quot;degrees&quot;</span> <span class="op">=&gt;</span> <span class="ident">SharedUnit</span>::<span class="ident">Angle</span>(<span class="ident">Angle</span>::<span class="ident">Degrees</span>(<span class="ident">value</span>)),
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="ident">SharedUnit</span>::<span class="prelude-val">None</span>,
+        }
     }
-  }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">UnitRepr</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;&gt;</span> <span class="kw">for</span> <span class="ident">SharedUnit</span> {
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">u</span>: <span class="ident">UnitRepr</span>) <span class="op">-&gt;</span> <span class="ident">SharedUnit</span> {
-    <span class="kw">match</span> <span class="ident">u</span> {
-      <span class="ident">UnitRepr</span>::<span class="ident">Length</span>(<span class="ident">length</span>) <span class="op">=&gt;</span> <span class="ident">length</span>.<span class="ident">into</span>(),
-      <span class="ident">UnitRepr</span>::<span class="ident">Angle</span>(<span class="ident">angle</span>) <span class="op">=&gt;</span> <span class="ident">angle</span>.<span class="ident">into</span>(),
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">u</span>: <span class="ident">UnitRepr</span>) <span class="op">-&gt;</span> <span class="ident">SharedUnit</span> {
+        <span class="kw">match</span> <span class="ident">u</span> {
+            <span class="ident">UnitRepr</span>::<span class="ident">Length</span>(<span class="ident">length</span>) <span class="op">=&gt;</span> <span class="ident">length</span>.<span class="ident">into</span>(),
+            <span class="ident">UnitRepr</span>::<span class="ident">Angle</span>(<span class="ident">angle</span>) <span class="op">=&gt;</span> <span class="ident">angle</span>.<span class="ident">into</span>(),
+        }
     }
-  }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SharedUnit</span> {
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">SharedUnit</span> {
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">result</span>) <span class="op">=</span> <span class="ident">parse</span>::<span class="ident">unit</span>(<span class="ident">s</span>.<span class="ident">as_bytes</span>()) {
-      <span class="ident">result</span>.<span class="number">1</span>.<span class="ident">into</span>()
-    } <span class="kw">else</span> {
-      <span class="ident">SharedUnit</span>::<span class="prelude-val">None</span>
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">SharedUnit</span> {
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">result</span>) <span class="op">=</span> <span class="ident">parse</span>::<span class="ident">unit</span>(<span class="ident">s</span>.<span class="ident">as_bytes</span>()) {
+            <span class="ident">result</span>.<span class="number">1</span>.<span class="ident">into</span>()
+        } <span class="kw">else</span> {
+            <span class="ident">SharedUnit</span>::<span class="prelude-val">None</span>
+        }
     }
-  }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SharedUnit</span> {
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">s</span>: <span class="ident">String</span>) <span class="op">-&gt;</span> <span class="ident">SharedUnit</span> {
-    <span class="kw">let</span> <span class="ident">slice</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">s</span>;
-    <span class="ident">slice</span>.<span class="ident">into</span>()
-  }
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">s</span>: <span class="ident">String</span>) <span class="op">-&gt;</span> <span class="ident">SharedUnit</span> {
+        <span class="kw">let</span> <span class="ident">slice</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">s</span>;
+        <span class="ident">slice</span>.<span class="ident">into</span>()
+    }
 }
 </pre>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g. <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g. <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g. <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p></div></div></aside><script>window.rootPath = "../../../";window.currentCrate = "jss";</script><script src="../../../aliases.js"></script><script src="../../../main.js"></script><script defer src="../../../search-index.js"></script></body></html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `eval` crate."><meta name="keywords" content="rust, rustlang, rust-lang, eval"><title>eval - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../dark.css"><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script src="../storage.js"></script></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><p class='location'>Crate eval</p><div class="sidebar-elems"><div class="block items"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#functions">Functions</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'eval', ty: 'mod', relpath: '../'};</script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><input class="search-input" name="search" autocomplete="off" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../src/eval/lib.rs.html#1-677' title='goto source code'>[src]</a></span><span class='in-band'>Crate <a class="mod" href=''>eval</a></span></h1><div class='docblock'><p>Eval is a powerful expression evaluator.</p>
+<p>Supported operators: <code>!</code> <code>!=</code> <code>&quot;&quot;</code> <code>''</code> <code>()</code> <code>[]</code> <code>.</code> <code>,</code> <code>&gt;</code> <code>&lt;</code> <code>&gt;=</code> <code>&lt;=</code>
+<code>==</code> <code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>%</code> <code>&amp;&amp;</code> <code>||</code> <code>n..m</code>.</p>
+<p>Built-in functions: <code>min()</code> <code>max()</code> <code>len()</code> <code>is_empty()</code> <code>array()</code>.</p>
+<h2 id="examples" class="section-header"><a href="#examples">Examples</a></h2>
+<p>You can do mathematical calculations with supported operators:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">eval</span>::{<span class="ident">eval</span>, <span class="ident">to_value</span>};
+
+<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">eval</span>(<span class="string">&quot;1 + 2 + 3&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">to_value</span>(<span class="number">6</span>)));
+<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">eval</span>(<span class="string">&quot;2 * 2 + 3&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">to_value</span>(<span class="number">7</span>)));
+<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">eval</span>(<span class="string">&quot;2 / 2 + 3&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">to_value</span>(<span class="number">4.0</span>)));
+<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">eval</span>(<span class="string">&quot;2 / 2 + 3 / 3&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">to_value</span>(<span class="number">2.0</span>)));</pre>
+<p>You can eval with context:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">eval</span>::{<span class="ident">Expr</span>, <span class="ident">to_value</span>};
+
+<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Expr</span>::<span class="ident">new</span>(<span class="string">&quot;foo == bar&quot;</span>)
+               .<span class="ident">value</span>(<span class="string">&quot;foo&quot;</span>, <span class="bool-val">true</span>)
+               .<span class="ident">value</span>(<span class="string">&quot;bar&quot;</span>, <span class="bool-val">true</span>)
+               .<span class="ident">exec</span>(),
+           <span class="prelude-val">Ok</span>(<span class="ident">to_value</span>(<span class="bool-val">true</span>)));</pre>
+<p>You can access data like javascript by using <code>.</code> and <code>[]</code>. <code>[]</code> supports expression.</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">eval</span>::{<span class="ident">Expr</span>, <span class="ident">to_value</span>};
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">HashMap</span>;
+
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">object</span> <span class="op">=</span> <span class="ident">HashMap</span>::<span class="ident">new</span>();
+<span class="ident">object</span>.<span class="ident">insert</span>(<span class="string">&quot;foos&quot;</span>, <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;Hello&quot;</span>, <span class="string">&quot;world&quot;</span>, <span class="string">&quot;!&quot;</span>]);
+
+<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Expr</span>::<span class="ident">new</span>(<span class="string">&quot;object.foos[2-1] == &#39;world&#39;&quot;</span>) <span class="comment">// Access field `foos` and index `2-1`</span>
+               .<span class="ident">value</span>(<span class="string">&quot;object&quot;</span>, <span class="ident">object</span>)
+               .<span class="ident">exec</span>(),
+           <span class="prelude-val">Ok</span>(<span class="ident">to_value</span>(<span class="bool-val">true</span>)));</pre>
+<p>You can eval with function:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">eval</span>::{<span class="ident">Expr</span>, <span class="ident">to_value</span>};
+
+<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Expr</span>::<span class="ident">new</span>(<span class="string">&quot;say_hello()&quot;</span>)
+               .<span class="ident">function</span>(<span class="string">&quot;say_hello&quot;</span>, <span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="prelude-val">Ok</span>(<span class="ident">to_value</span>(<span class="string">&quot;Hello world!&quot;</span>)))
+               .<span class="ident">exec</span>(),
+           <span class="prelude-val">Ok</span>(<span class="ident">to_value</span>(<span class="string">&quot;Hello world!&quot;</span>)));</pre>
+<p>You can create an array with <code>array()</code>:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">eval</span>::{<span class="ident">eval</span>, <span class="ident">to_value</span>};
+
+<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">eval</span>(<span class="string">&quot;array(1, 2, 3, 4, 5)&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">to_value</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])));</pre>
+<p>You can create an integer array with <code>n..m</code>:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">eval</span>::{<span class="ident">eval</span>, <span class="ident">to_value</span>};
+
+<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">eval</span>(<span class="string">&quot;0..5&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">to_value</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])));</pre>
+<h2 id="built-in-functions" class="section-header"><a href="#built-in-functions">Built-in functions</a></h2><h3 id="min" class="section-header"><a href="#min">min()</a></h3>
+<p>Accept multiple arguments and return the minimum value.</p>
+<h3 id="max" class="section-header"><a href="#max">max()</a></h3>
+<p>Accept multiple arguments and return the maximum value.</p>
+<h3 id="len" class="section-header"><a href="#len">len()</a></h3>
+<p>Accept single arguments and return the length of value. Only accept String, Array, Object and Null.</p>
+<h3 id="is_empty" class="section-header"><a href="#is_empty">is_empty()</a></h3>
+<p>Accept single arguments and return a boolean. Check whether the value is empty or not.</p>
+<h3 id="array" class="section-header"><a href="#array">array()</a></h3>
+<p>Accept multiple arguments and return an array.</p>
+</div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.ExecOptions.html"
+                                  title='struct eval::ExecOptions'>ExecOptions</a></td>
+                           <td class='docblock-short'>
+                                <p>Execute options</p>
+
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.Expr.html"
+                                  title='struct eval::Expr'>Expr</a></td>
+                           <td class='docblock-short'>
+                                <p>Expression builder</p>
+
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.Function.html"
+                                  title='struct eval::Function'>Function</a></td>
+                           <td class='docblock-short'>
+                                <p>Custom function</p>
+
+                           </td>
+                       </tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.Error.html"
+                                  title='enum eval::Error'>Error</a></td>
+                           <td class='docblock-short'>
+                                <p>Expression parsing error</p>
+
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.Value.html"
+                                  title='enum eval::Value'>Value</a></td>
+                           <td class='docblock-short'>
+                                <p>Represents any valid JSON value.</p>
+
+                           </td>
+                       </tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class="fn" href="fn.eval.html"
+                                  title='fn eval::eval'>eval</a></td>
+                           <td class='docblock-short'>
+                                <p>Evaluates the value of an expression.</p>
+
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="fn" href="fn.to_value.html"
+                                  title='fn eval::to_value'>to_value</a></td>
+                           <td class='docblock-short'>
+                                <p>Convert variable to <code>serde_json::Value</code></p>
+
+                           </td>
+                       </tr></table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class="type" href="type.Context.html"
+                                  title='type eval::Context'>Context</a></td>
+                           <td class='docblock-short'>
+                                <p>Custom context.</p>
+
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="type" href="type.Contexts.html"
+                                  title='type eval::Contexts'>Contexts</a></td>
+                           <td class='docblock-short'>
+                                <p>Custom contexts. The value of the last context is searched first.</p>
+
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="type" href="type.Functions.html"
+                                  title='type eval::Functions'>Functions</a></td>
+                           <td class='docblock-short'>
+                                <p>Custom functions.</p>
+
+                           </td>
+                       </tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g. <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g. <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g. <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p></div></div></aside><script>window.rootPath = "../";window.currentCrate = "eval";</script><script src="../aliases.js"></script><script src="../main.js"></script><script defer src="../search-index.js"></script></body></html>

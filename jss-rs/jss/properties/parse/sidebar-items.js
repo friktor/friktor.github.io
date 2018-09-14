@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["UnitRepr",""]],"fn":[["angle",""],["gradient_stop",""],["length",""],["transform_parse",""],["unit",""]],"struct":[["AngleRepr",""],["GradientFunction",""],["GradientStopRepr",""],["LengthRepr",""],["TransformFunction",""]]});
+initSidebarItems({"enum":[["UnitRepr",""]],"fn":[["angle",""],["filter_parse",""],["fn_name",""],["gradient_stop",""],["length",""],["transform_parse",""],["unit",""]],"struct":[["AngleRepr",""],["FilterFunction",""],["GradientFunction",""],["GradientStopRepr",""],["LengthRepr",""],["TransformFunction",""]]});

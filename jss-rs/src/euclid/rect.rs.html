@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/antonshramko/.cargo/registry/src/github.com-1ecc6299db9ec823/euclid-0.17.3/src/rect.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>rect.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><input class="search-input" name="search" autocomplete="off" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/anton/.cargo/registry/src/github.com-1ecc6299db9ec823/euclid-0.19.0/src/rect.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>rect.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><input class="search-input" name="search" autocomplete="off" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -803,6 +803,58 @@
 <span id="803">803</span>
 <span id="804">804</span>
 <span id="805">805</span>
+<span id="806">806</span>
+<span id="807">807</span>
+<span id="808">808</span>
+<span id="809">809</span>
+<span id="810">810</span>
+<span id="811">811</span>
+<span id="812">812</span>
+<span id="813">813</span>
+<span id="814">814</span>
+<span id="815">815</span>
+<span id="816">816</span>
+<span id="817">817</span>
+<span id="818">818</span>
+<span id="819">819</span>
+<span id="820">820</span>
+<span id="821">821</span>
+<span id="822">822</span>
+<span id="823">823</span>
+<span id="824">824</span>
+<span id="825">825</span>
+<span id="826">826</span>
+<span id="827">827</span>
+<span id="828">828</span>
+<span id="829">829</span>
+<span id="830">830</span>
+<span id="831">831</span>
+<span id="832">832</span>
+<span id="833">833</span>
+<span id="834">834</span>
+<span id="835">835</span>
+<span id="836">836</span>
+<span id="837">837</span>
+<span id="838">838</span>
+<span id="839">839</span>
+<span id="840">840</span>
+<span id="841">841</span>
+<span id="842">842</span>
+<span id="843">843</span>
+<span id="844">844</span>
+<span id="845">845</span>
+<span id="846">846</span>
+<span id="847">847</span>
+<span id="848">848</span>
+<span id="849">849</span>
+<span id="850">850</span>
+<span id="851">851</span>
+<span id="852">852</span>
+<span id="853">853</span>
+<span id="854">854</span>
+<span id="855">855</span>
+<span id="856">856</span>
+<span id="857">857</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2013 The Servo Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution.</span>
@@ -826,11 +878,11 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>)]</span>
 <span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Deserializer</span>, <span class="ident">Serialize</span>, <span class="ident">Serializer</span>};
 
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">borrow</span>::<span class="ident">Borrow</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cmp</span>::<span class="ident">PartialOrd</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">hash</span>::{<span class="ident">Hash</span>, <span class="ident">Hasher</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::{<span class="ident">Add</span>, <span class="ident">Div</span>, <span class="ident">Mul</span>, <span class="ident">Sub</span>};
+<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">borrow</span>::<span class="ident">Borrow</span>;
+<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">cmp</span>::<span class="ident">PartialOrd</span>;
+<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">fmt</span>;
+<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">hash</span>::{<span class="ident">Hash</span>, <span class="ident">Hasher</span>};
+<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">ops</span>::{<span class="ident">Add</span>, <span class="ident">Div</span>, <span class="ident">Mul</span>, <span class="ident">Sub</span>};
 
 
 <span class="doccomment">/// A 2d Rectangle optionally tagged with a unit.</span>
@@ -903,8 +955,21 @@
     <span class="doccomment">/// Constructor.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">origin</span>: <span class="ident">TypedPoint2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>, <span class="ident">size</span>: <span class="ident">TypedSize2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="ident">TypedRect</span> {
-            <span class="ident">origin</span>: <span class="ident">origin</span>,
-            <span class="ident">size</span>: <span class="ident">size</span>,
+            <span class="ident">origin</span>,
+            <span class="ident">size</span>,
+        }
+    }
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">TypedRect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
+<span class="kw">where</span>
+    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Zero</span>
+{
+    <span class="doccomment">/// Creates a rect of the given size, at offset zero.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_size</span>(<span class="ident">size</span>: <span class="ident">TypedSize2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="ident">TypedRect</span> {
+            <span class="ident">origin</span>: <span class="ident">TypedPoint2D</span>::<span class="ident">zero</span>(),
+            <span class="ident">size</span>,
         }
     }
 }
@@ -1143,6 +1208,16 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">TypedRect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
 <span class="kw">where</span>
+    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">One</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+{
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">center</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">TypedPoint2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">two</span> <span class="op">=</span> <span class="ident">T</span>::<span class="ident">one</span>() <span class="op">+</span> <span class="ident">T</span>::<span class="ident">one</span>();
+        <span class="self">self</span>.<span class="ident">origin</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">to_vector</span>() <span class="op">/</span> <span class="ident">two</span>
+    }
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">TypedRect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
+<span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Zero</span>,
 {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -1263,8 +1338,20 @@
     <span class="doccomment">/// When casting from floating point to integer coordinates, the decimals are truncated</span>
     <span class="doccomment">/// as one would expect from a simple cast, but this behavior does not always make sense</span>
     <span class="doccomment">/// geometrically. Consider using round(), round_in or round_out() before casting.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast</span><span class="op">&lt;</span><span class="ident">T1</span>: <span class="ident">NumCast</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TypedRect</span><span class="op">&lt;</span><span class="ident">T1</span>, <span class="ident">Unit</span><span class="op">&gt;&gt;</span> {
-        <span class="kw">match</span> (<span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">cast</span>(), <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">cast</span>()) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast</span><span class="op">&lt;</span><span class="ident">T1</span>: <span class="ident">NumCast</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">TypedRect</span><span class="op">&lt;</span><span class="ident">T1</span>, <span class="ident">Unit</span><span class="op">&gt;</span> {
+        <span class="ident">TypedRect</span>::<span class="ident">new</span>(
+            <span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">cast</span>(),
+            <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">cast</span>(),
+        )
+    }
+
+    <span class="doccomment">/// Fallible cast from one numeric representation to another, preserving the units.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// When casting from floating point to integer coordinates, the decimals are truncated</span>
+    <span class="doccomment">/// as one would expect from a simple cast, but this behavior does not always make sense</span>
+    <span class="doccomment">/// geometrically. Consider using round(), round_in or round_out() before casting.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_cast</span><span class="op">&lt;</span><span class="ident">T1</span>: <span class="ident">NumCast</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TypedRect</span><span class="op">&lt;</span><span class="ident">T1</span>, <span class="ident">Unit</span><span class="op">&gt;&gt;</span> {
+        <span class="kw">match</span> (<span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">try_cast</span>(), <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">try_cast</span>()) {
             (<span class="prelude-val">Some</span>(<span class="ident">origin</span>), <span class="prelude-val">Some</span>(<span class="ident">size</span>)) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">TypedRect</span>::<span class="ident">new</span>(<span class="ident">origin</span>, <span class="ident">size</span>)),
             <span class="kw">_</span> <span class="op">=&gt;</span> <span class="prelude-val">None</span>,
         }
@@ -1311,12 +1398,12 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">NumCast</span> <span class="op">+</span> <span class="ident">Copy</span>, <span class="ident">Unit</span><span class="op">&gt;</span> <span class="ident">TypedRect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Unit</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Cast into an `f32` rectangle.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_f32</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">TypedRect</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Unit</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">cast</span>().<span class="ident">unwrap</span>()
+        <span class="self">self</span>.<span class="ident">cast</span>()
     }
 
     <span class="doccomment">/// Cast into an `f64` rectangle.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_f64</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">TypedRect</span><span class="op">&lt;</span><span class="ident">f64</span>, <span class="ident">Unit</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">cast</span>().<span class="ident">unwrap</span>()
+        <span class="self">self</span>.<span class="ident">cast</span>()
     }
 
     <span class="doccomment">/// Cast into an `usize` rectangle, truncating decimals if any.</span>
@@ -1325,7 +1412,7 @@
     <span class="doccomment">/// to `round()`, `round_in()` or `round_out()` before the cast in order to</span>
     <span class="doccomment">/// obtain the desired conversion behavior.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_usize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">TypedRect</span><span class="op">&lt;</span><span class="ident">usize</span>, <span class="ident">Unit</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">cast</span>().<span class="ident">unwrap</span>()
+        <span class="self">self</span>.<span class="ident">cast</span>()
     }
 
     <span class="doccomment">/// Cast into an `u32` rectangle, truncating decimals if any.</span>
@@ -1334,7 +1421,7 @@
     <span class="doccomment">/// to `round()`, `round_in()` or `round_out()` before the cast in order to</span>
     <span class="doccomment">/// obtain the desired conversion behavior.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_u32</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">TypedRect</span><span class="op">&lt;</span><span class="ident">u32</span>, <span class="ident">Unit</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">cast</span>().<span class="ident">unwrap</span>()
+        <span class="self">self</span>.<span class="ident">cast</span>()
     }
 
     <span class="doccomment">/// Cast into an `i32` rectangle, truncating decimals if any.</span>
@@ -1343,7 +1430,7 @@
     <span class="doccomment">/// to `round()`, `round_in()` or `round_out()` before the cast in order to</span>
     <span class="doccomment">/// obtain the desired conversion behavior.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_i32</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">TypedRect</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Unit</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">cast</span>().<span class="ident">unwrap</span>()
+        <span class="self">self</span>.<span class="ident">cast</span>()
     }
 
     <span class="doccomment">/// Cast into an `i64` rectangle, truncating decimals if any.</span>
@@ -1352,7 +1439,15 @@
     <span class="doccomment">/// to `round()`, `round_in()` or `round_out()` before the cast in order to</span>
     <span class="doccomment">/// obtain the desired conversion behavior.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_i64</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">TypedRect</span><span class="op">&lt;</span><span class="ident">i64</span>, <span class="ident">Unit</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">cast</span>().<span class="ident">unwrap</span>()
+        <span class="self">self</span>.<span class="ident">cast</span>()
+    }
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">TypedSize2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;&gt;</span> <span class="kw">for</span> <span class="ident">TypedRect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
+<span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Zero</span>
+{
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">size</span>: <span class="ident">TypedSize2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="self">Self</span>::<span class="ident">from_size</span>(<span class="ident">size</span>)
     }
 }
 
@@ -1363,7 +1458,7 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident">point</span>::<span class="ident">Point2D</span>;
+    <span class="kw">use</span> <span class="ident">point</span>::{<span class="ident">Point2D</span>, <span class="ident">point2</span>};
     <span class="kw">use</span> <span class="ident">vector</span>::<span class="ident">vec2</span>;
     <span class="kw">use</span> <span class="ident">side_offsets</span>::<span class="ident">SideOffsets2D</span>;
     <span class="kw">use</span> <span class="ident">size</span>::<span class="ident">Size2D</span>;
@@ -1607,6 +1702,15 @@
             }
             <span class="ident">x</span> <span class="op">+=</span> <span class="number">0.1</span>
         }
+    }
+
+    <span class="attribute">#[<span class="ident">test</span>]</span>
+    <span class="kw">fn</span> <span class="ident">test_center</span>() {
+        <span class="kw">let</span> <span class="ident">r</span>: <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">rect</span>(<span class="op">-</span><span class="number">2</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">10</span>);
+        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">r</span>.<span class="ident">center</span>(), <span class="ident">point2</span>(<span class="number">0</span>, <span class="number">10</span>));
+
+        <span class="kw">let</span> <span class="ident">r</span>: <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">rect</span>(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>);
+        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">r</span>.<span class="ident">center</span>(), <span class="ident">point2</span>(<span class="number">2.5</span>, <span class="number">4.0</span>));
     }
 }
 </pre>

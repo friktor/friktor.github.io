@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["merge_style",""],["parse_style",""],["prepare_style",""]]});
+initSidebarItems({"fn":[["parser_style",""],["setters_style",""]]});

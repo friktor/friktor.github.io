@@ -1,0 +1,216 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `types` mod in crate `jss`."><meta name="keywords" content="rust, rustlang, rust-lang, types"><title>jss::types - Rust</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><p class='location'>Module types</p><div class="sidebar-elems"><div class="block items"><ul><li><a href="#reexports">Re-exports</a></li><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#functions">Functions</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class='location'><a href='../index.html'>jss</a></p><script>window.sidebarCurrent = {name: 'types', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><input class="search-input" name="search" autocomplete="off" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../../src/jss/types/mod.rs.html#1-23' title='goto source code'>[src]</a></span><span class='in-band'>Module <a href='../index.html'>jss</a>::<wbr><a class="mod" href=''>types</a></span></h1><h2 id='reexports' class='section-header'><a href="#reexports">Re-exports</a></h2>
+<table><tr><td><code>pub use self::<a class="mod" href="../../jss/types/style_properties_repr/index.html" title="mod jss::types::style_properties_repr">style_properties_repr</a>::*;</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class="mod" href="property_types/index.html"
+                                  title='mod jss::types::property_types'>property_types</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="mod" href="style_properties_repr/index.html"
+                                  title='mod jss::types::style_properties_repr'>style_properties_repr</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr></table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.CollectedStyle.html"
+                                  title='struct jss::types::CollectedStyle'>CollectedStyle</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.Context.html"
+                                  title='struct jss::types::Context'>Context</a></td>
+                           <td class='docblock-short'>
+                                <p>Context with other needed info - for parse and prepares,
+aka dimensions screen, element measures, variables, and other.</p>
+
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.DefaultParseMiddleware.html"
+                                  title='struct jss::types::DefaultParseMiddleware'>DefaultParseMiddleware</a></td>
+                           <td class='docblock-short'>
+                                <p>Default context representation for Parsing Trait
+Trait <code>TParseMiddleware</code> implemented in jss_derive as proc-macro</p>
+
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.ParseOptions.html"
+                                  title='struct jss::types::ParseOptions'>ParseOptions</a></td>
+                           <td class='docblock-short'>
+                                <p>Options for parse style from uniform functions</p>
+
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.Properties.html"
+                                  title='struct jss::types::Properties'>Properties</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.PropertiesStore.html"
+                                  title='struct jss::types::PropertiesStore'>PropertiesStore</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.PropertyKeyInfo.html"
+                                  title='struct jss::types::PropertyKeyInfo'>PropertyKeyInfo</a></td>
+                           <td class='docblock-short'>
+                                <p>Expanded info about property key - needed middleware, case, etc..</p>
+
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.Style.html"
+                                  title='struct jss::types::Style'>Style</a></td>
+                           <td class='docblock-short'>
+                                <p>Style element, with all element status, and context`s,
+with implementations of traits for parse unions of one element</p>
+
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.StyleBuilder.html"
+                                  title='struct jss::types::StyleBuilder'>StyleBuilder</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.Stylesheet.html"
+                                  title='struct jss::types::Stylesheet'>Stylesheet</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.Appearance.html"
+                                  title='enum jss::types::Appearance'>Appearance</a></td>
+                           <td class='docblock-short'>
+                                <p>Values for appearance styles properties</p>
+
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.Case.html"
+                                  title='enum jss::types::Case'>Case</a></td>
+                           <td class='docblock-short'>
+                                <p>What format of properties keys to use and check when parsing
+Current allowed: snake_case, camelCase, kebab-case or ignore case
+Default: camelCase</p>
+
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.Layout.html"
+                                  title='enum jss::types::Layout'>Layout</a></td>
+                           <td class='docblock-short'>
+                                <p>Values for layout styles properties</p>
+
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.ParseError.html"
+                                  title='enum jss::types::ParseError'>ParseError</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.ProcessingError.html"
+                                  title='enum jss::types::ProcessingError'>ProcessingError</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.PropertyError.html"
+                                  title='enum jss::types::PropertyError'>PropertyError</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.PropertyParseType.html"
+                                  title='enum jss::types::PropertyParseType'>PropertyParseType</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.PropertyValue.html"
+                                  title='enum jss::types::PropertyValue'>PropertyValue</a></td>
+                           <td class='docblock-short'>
+                                <p>Values for union of appearance and layout</p>
+
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.SharedUnit.html"
+                                  title='enum jss::types::SharedUnit'>SharedUnit</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.SourceFormat.html"
+                                  title='enum jss::types::SourceFormat'>SourceFormat</a></td>
+                           <td class='docblock-short'>
+                                <p>From what data format to parse, currently available: JSON, YAML
+Default: JSON</p>
+
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.Variable.html"
+                                  title='enum jss::types::Variable'>Variable</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class="fn" href="fn.pair_to_flex.html"
+                                  title='fn jss::types::pair_to_flex'>pair_to_flex</a></td>
+                           <td class='docblock-short'>
+                                <p>Convertor: create FlexStyle by property key and unit value</p>
+
+                           </td>
+                       </tr></table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class="type" href="type.PropertiesApperance.html"
+                                  title='type jss::types::PropertiesApperance'>PropertiesApperance</a></td>
+                           <td class='docblock-short'>
+                                <p>Link type for appearance <code>PropertiesStore</code></p>
+
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="type" href="type.PropertiesExpressions.html"
+                                  title='type jss::types::PropertiesExpressions'>PropertiesExpressions</a></td>
+                           <td class='docblock-short'>
+                                <p>Link type for calc expressions <code>PropertiesStore</code></p>
+
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="type" href="type.PropertiesLayout.html"
+                                  title='type jss::types::PropertiesLayout'>PropertiesLayout</a></td>
+                           <td class='docblock-short'>
+                                <p>Link type for layout <code>PropertiesStore</code></p>
+
+                           </td>
+                       </tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g. <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g. <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g. <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p></div></div></aside><script>window.rootPath = "../../";window.currentCrate = "jss";</script><script src="../../aliases.js"></script><script src="../../main.js"></script><script defer src="../../search-index.js"></script></body></html>

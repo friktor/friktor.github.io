@@ -41,23 +41,31 @@
 <span id="41">41</span>
 <span id="42">42</span>
 <span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
 </pre><pre class="rust ">
-<span class="kw">use</span> <span class="ident">properties</span>::<span class="ident">parse</span>::{<span class="ident">AngleRepr</span>, <span class="comment">/* angle, */</span>
-<span class="ident">GradientStopRepr</span>, <span class="comment">/* gradient_stop */</span>
+<span class="kw">use</span> <span class="ident">properties</span>::<span class="ident">parse</span>::{
+  <span class="ident">GradientStopRepr</span>,
+  <span class="ident">gradient_stop</span>,
+  <span class="ident">AngleRepr</span>,
+  <span class="ident">angle</span>,
 };
-<span class="comment">// use nom::alpha;</span>
-<span class="comment">// use std::str;</span>
+
+<span class="kw">use</span> <span class="ident">nom</span>::<span class="ident">alpha</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">str</span>;
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GradientFunction</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span> {
-  <span class="kw">pub</span> <span class="ident">stops</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">GradientStopRepr</span><span class="op">&gt;</span>,
-  <span class="kw">pub</span> <span class="ident">angle</span>: <span class="ident">AngleRepr</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">stops</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">GradientStopRepr</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">angle</span>: <span class="ident">AngleRepr</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span>,
 }
 
 <span class="comment">// named!(fun_separated(&amp;[u8]) -&gt; GradientFunction, do_parse!(</span>
 <span class="comment">//   angle: angle &gt;&gt;</span>
 <span class="comment">//   char!(&#39;,&#39;) &gt;&gt;</span>
-<span class="comment">//   stops: map_res!(take_until!(&quot;)&quot;, separated_list!(char!(&quot;,&quot;), gradient_stop))) &gt;&gt;</span>
+<span class="comment">//   stops: map_res!(take_until!(char!(b&quot;)&quot;)), separated_list!(char!(b&quot;,&quot;), gradient_stop)) &gt;&gt;</span>
 <span class="comment">//   (GradientFunction {</span>
 <span class="comment">//     angle,</span>
 <span class="comment">//     stops</span>
