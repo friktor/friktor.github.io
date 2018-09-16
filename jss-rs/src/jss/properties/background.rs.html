@@ -46,9 +46,15 @@
 <span id="46">46</span>
 <span id="47">47</span>
 <span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
 </pre><pre class="rust ">
+<span class="kw">use</span> <span class="ident">types</span>::{<span class="ident">Appearance</span>, <span class="ident">PropertyValue</span>};
 <span class="kw">use</span> <span class="ident">properties</span>::<span class="ident">Color</span>;
 <span class="kw">use</span> <span class="ident">yoga</span>::<span class="ident">StyleUnit</span>;
+
+<span class="macro">impl_union_into_appearance</span><span class="macro">!</span>(<span class="ident">Background</span>);
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
 <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">untagged</span>)]</span>

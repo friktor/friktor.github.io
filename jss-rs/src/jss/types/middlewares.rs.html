@@ -95,11 +95,13 @@
 <span id="95">95</span>
 <span id="96">96</span>
 <span id="97">97</span>
+<span id="98">98</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">utils</span>::{<span class="ident">apperance_keys_contains</span>, <span class="ident">layout_keys_contains</span>};
 <span class="kw">use</span> <span class="ident">types</span>::{<span class="ident">Case</span>, <span class="ident">PropertyError</span>};
 <span class="kw">use</span> <span class="ident">inflector</span>::<span class="ident">Inflector</span>;
 
+<span class="doccomment">/// Middleware enum with property type of current style field</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">PropertyParseType</span> {
     <span class="doccomment">/// Calculator expression parser. For properties that use calc in runtime. Key started from &quot;~&quot;</span>

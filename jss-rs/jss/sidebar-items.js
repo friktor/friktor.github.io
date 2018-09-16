@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["convert",""],["parser",""],["properties",""],["traits",""],["types",""],["utils",""]]});
+initSidebarItems({"mod":[["convert",""],["parser",""],["properties",""],["traits",""],["types","All common functional types"],["utils","Various utils"]]});
