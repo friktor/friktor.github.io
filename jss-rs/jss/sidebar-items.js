@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["convert",""],["parser",""],["properties",""],["traits",""],["types","All common functional types"],["utils","Various utils"]]});
+initSidebarItems({"mod":[["animation","Animations module for create simple tick based animations for one or more properties"],["parser",""],["properties",""],["traits",""],["types","All common functional types"],["utils","Various utils"]]});

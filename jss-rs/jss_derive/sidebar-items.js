@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["parser_style",""],["setters_style",""]]});
+initSidebarItems({"derive":[["ImplPropertySetters",""],["ImplStyleParser",""]]});
